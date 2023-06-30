@@ -1,11 +1,16 @@
+import Home from './pages/Home/Home'
+
+import Navbar from './components/Navbar/Navbar'
+
 import './App.css'
 
 function App() {
 
   return (
-    <>
-      <h1>THE FILM BASE</h1>
-    </>
+    <div className='text-white'>
+      <Navbar />
+      <Home />
+    </div>
   )
 }
 
