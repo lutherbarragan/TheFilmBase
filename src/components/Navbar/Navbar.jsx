@@ -22,9 +22,38 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex gap-2">
-                    <div className="SearchIcon flex justify-center items-center w-7 h-7 text-xs text-zinc-700 border-zinc-700 active:bg-zinc-700 rounded-full duration-300 active:w-52 active:justify-start active:pl-2 active:text-zinc-300 ">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    <div className="relative group text-sm text-zinc-700">
+                        <FontAwesomeIcon
+                            icon={faMagnifyingGlass}
+                            className="absolute 
+                            top-1/2 
+                            left-1/2 
+                            -translate-x-1/2 
+                            -translate-y-1/2
+                            -z-50
+                            duration-300 
+                            group-active:left-0 group-active:translate-x-1/2 group-active:text-zinc-500
+                            group-focus-within:left-0 group-focus-within:translate-x-1/2 group-focus-within:text-zinc-500
+                            "
+                        />
+                        <input
+                            type="text"
+                            className="
+                            SearchBarInput 
+                            text-transparent 
+                            text-sm 
+                            w-7 
+                            bg-transparent 
+                            rounded-full 
+                            h-7 
+                            border-zinc-700 
+                            duration-300 
+                            group-active:w-48 group-active:pl-6 group-active:text-zinc-500 group-active:border-zinc-500 
+                            group-focus-within:w-48 group-focus-within:pl-6 group-focus-within:text-zinc-500 group-focus-within:border-zinc-500
+                            "
+                        />
                     </div>
+
                     <span className="w-7 h-7 flex justify-center items-center bg-gray-300 rounded-full">
                         <FontAwesomeIcon icon={faUser} />
                     </span>
