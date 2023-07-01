@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faUser,
@@ -5,13 +7,24 @@ import {
     faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
+import Sidebar from "../Sidebar/Sidebar";
 import "./Navbar.css";
 
 const Navbar = () => {
+    const [sidebarState, setSidebarState] = useState(false);
+
     return (
         <nav>
-            <div className="flex relative items-center justify-between">
-                <FontAwesomeIcon icon={faBars} className=" text-2xl" />
+            <Sidebar
+                isBarOpen={sidebarState}
+                closeBar={() => setSidebarState(false)}
+            />
+            <div className="flex relative items-center pt-2 justify-between">
+                <FontAwesomeIcon
+                    icon={faBars}
+                    className=" text-2xl"
+                    onClick={() => setSidebarState(true)}
+                />
 
                 <div className="flex mx-auto px-2">
                     <img
@@ -22,7 +35,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex gap-2">
-                    <div className="relative group text-sm text-zinc-700">
+                    <div className="relative group text-sm text-neutral-700">
                         <FontAwesomeIcon
                             icon={faMagnifyingGlass}
                             className="absolute 
@@ -32,8 +45,8 @@ const Navbar = () => {
                             -translate-y-1/2
                             -z-50
                             duration-300 
-                            group-active:left-0 group-active:translate-x-1/2 group-active:text-zinc-500
-                            group-focus-within:left-0 group-focus-within:translate-x-1/2 group-focus-within:text-zinc-500
+                            group-active:left-0 group-active:translate-x-1/2 group-active:text-neutral-400
+                            group-focus-within:left-0 group-focus-within:translate-x-1/2 group-focus-within:text-neutral-400
                             "
                         />
                         <input
@@ -46,15 +59,15 @@ const Navbar = () => {
                             bg-transparent 
                             rounded-full 
                             h-7 
-                            border-zinc-700 
+                            border-neutral-700 
                             duration-300 
-                            group-active:w-48 group-active:pl-6 group-active:text-zinc-500 group-active:border-zinc-500 
-                            group-focus-within:w-48 group-focus-within:pl-6 group-focus-within:text-zinc-500 group-focus-within:border-zinc-500
+                            group-active:w-48 group-active:pl-6 group-active:text-neutral-400 group-active:border-neutral-400 
+                            group-focus-within:w-48 group-focus-within:pl-6 group-focus-within:text-neutral-400 group-focus-within:border-neutral-400
                             "
                         />
                     </div>
 
-                    <span className="w-7 h-7 flex justify-center items-center bg-gray-300 rounded-full">
+                    <span className="w-7 h-7 flex justify-center items-center bg-neutral-800 text-neutral-600 rounded-full">
                         <FontAwesomeIcon icon={faUser} />
                     </span>
                 </div>

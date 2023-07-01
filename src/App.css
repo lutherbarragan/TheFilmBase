@@ -1,4 +1,4 @@
 body {
-    background-color: #040506;
-    padding: 0.5rem 1rem;
+    @apply bg-neutral-950 text-white;
+    padding: 0 1rem;
 }
