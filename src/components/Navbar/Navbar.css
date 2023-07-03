@@ -1,3 +1,7 @@
 .SearchBarInput {
     border-width: 1px;
 }
+
+.SearchBarInput::placeholder {
+    @apply text-neutral-600;
+}

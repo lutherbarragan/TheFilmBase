@@ -9,6 +9,7 @@ import {
 
 import Sidebar from "../Sidebar/Sidebar";
 import "./Navbar.css";
+import Button from "../Button/Button";
 
 const Navbar = () => {
     const [sidebarState, setSidebarState] = useState(false);
@@ -35,42 +36,48 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex gap-2">
-                    <div className="relative group text-sm text-neutral-700">
-                        <FontAwesomeIcon
-                            icon={faMagnifyingGlass}
-                            className="absolute 
-                            top-1/2 
-                            left-1/2 
-                            -translate-x-1/2 
-                            -translate-y-1/2
-                            -z-50
-                            duration-300 
-                            group-active:left-0 group-active:translate-x-1/2 group-active:text-neutral-400
-                            group-focus-within:left-0 group-focus-within:translate-x-1/2 group-focus-within:text-neutral-400
-                            "
-                        />
-                        <input
-                            type="text"
-                            className="
-                            SearchBarInput 
-                            text-transparent 
-                            text-sm 
-                            w-7 
-                            bg-transparent 
-                            rounded-full 
-                            h-7 
-                            border-neutral-700 
-                            duration-300 
-                            group-active:w-48 group-active:pl-6 group-active:text-neutral-400 group-active:border-neutral-400 
-                            group-focus-within:w-48 group-focus-within:pl-6 group-focus-within:text-neutral-400 group-focus-within:border-neutral-400
-                            "
-                        />
-                    </div>
-
                     <span className="w-7 h-7 flex justify-center items-center bg-neutral-800 text-neutral-600 rounded-full">
                         <FontAwesomeIcon icon={faUser} />
                     </span>
                 </div>
+            </div>
+
+            <div className="relative group text-sm text-neutral-700 my-3 flex-grow">
+                <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="absolute 
+                            top-1/2 
+                            right-0
+                            pr-0.5
+                            rounded-full
+                            -translate-x-1/2
+                            -translate-y-1/2
+                            z-50
+                            duration-300
+                            hover:cursor-pointer
+                            hover:text-red-700
+                            group-active:text-red-700
+                            group-focus-within:text-red-700
+                            "
+                />
+                <input
+                    type="text"
+                    placeholder="Search movies, TV shows, series..."
+                    className="
+                            SearchBarInput
+                            pl-2
+                            pr-8
+                            text-sm 
+                            w-full
+                            bg-transparent 
+                            rounded-full 
+                            h-7
+                            border-neutral-700 
+                            duration-300 
+                          group-active:text-neutral-400 group-active:border-neutral-400 
+                          group-focus-within:text-neutral-400 group-focus-within:border-neutral-400
+                            "
+                />
             </div>
         </nav>
     );
