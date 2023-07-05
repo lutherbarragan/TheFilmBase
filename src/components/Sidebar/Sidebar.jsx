@@ -49,14 +49,15 @@ const Sidebar = ({ isBarOpen, closeBar }) => {
                         </div>
                         <div>
                             <h2 className="font-semibold mb-3">MENU</h2>
-                            <MenuLink active>
+                            <MenuLink to="/">
                                 <FontAwesomeIcon
                                     icon={faHouse}
                                     className="mr-2"
                                 />
                                 Home
                             </MenuLink>
-                            <MenuLink>
+
+                            <MenuLink to="/discover">
                                 <FontAwesomeIcon
                                     icon={faCompass}
                                     className="mr-2"
@@ -69,14 +70,15 @@ const Sidebar = ({ isBarOpen, closeBar }) => {
                             <h2 className="font-semibold mt-8 mb-3">
                                 CATEGORY
                             </h2>
-                            <MenuLink>
+                            <MenuLink to="/movies">
                                 <FontAwesomeIcon
                                     icon={faFilm}
                                     className="mr-2"
                                 />
                                 Movies
                             </MenuLink>
-                            <MenuLink>
+
+                            <MenuLink to="/shows">
                                 <FontAwesomeIcon icon={faTv} className="mr-2" />
                                 Shows
                             </MenuLink>
@@ -84,35 +86,39 @@ const Sidebar = ({ isBarOpen, closeBar }) => {
 
                         <div>
                             <h2 className="font-semibold mt-8 mb-3">LIBRARY</h2>
-                            <MenuLink>
+                            <MenuLink to="/recent">
                                 <FontAwesomeIcon
                                     icon={faClockRotateLeft}
                                     className="mr-2"
                                 />
                                 Recent
                             </MenuLink>
-                            <MenuLink>
+
+                            <MenuLink to="/bookmarks">
                                 <FontAwesomeIcon
                                     icon={faBookmark}
                                     className="mr-2"
                                 />
                                 Bookmarks
                             </MenuLink>
-                            <MenuLink>
+
+                            <MenuLink to="/my-lists">
                                 <FontAwesomeIcon
                                     icon={faList}
                                     className="mr-2"
                                 />
                                 My Lists
                             </MenuLink>
-                            <MenuLink>
+
+                            <MenuLink to="/rated">
                                 <FontAwesomeIcon
                                     icon={faStar}
                                     className="mr-2"
                                 />
                                 Rated
                             </MenuLink>
-                            <MenuLink>
+
+                            <MenuLink to="/downloads">
                                 <FontAwesomeIcon
                                     icon={faDownload}
                                     className="mr-2"
@@ -123,14 +129,15 @@ const Sidebar = ({ isBarOpen, closeBar }) => {
 
                         <div>
                             <h2 className="font-semibold mt-8 mb-3">GENERAL</h2>
-                            <MenuLink>
+                            <MenuLink to="/settings">
                                 <FontAwesomeIcon
                                     icon={faGear}
                                     className="mr-2"
                                 />
                                 Settings
                             </MenuLink>
-                            <MenuLink>
+
+                            <MenuLink to="/help">
                                 <FontAwesomeIcon
                                     icon={faCircleQuestion}
                                     className="mr-2"
