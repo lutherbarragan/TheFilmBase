@@ -20,7 +20,7 @@ import Button from "../Button/Button";
 const Sidebar = ({ isBarOpen, closeBar }) => {
     return (
         <div
-            className={`absolute z-50 w-full h-full min-h-screen ${
+            className={`SIDEBAR absolute z-50 w-full h-full min-h-screen ${
                 isBarOpen ? "left-0" : "-left-full duration-500"
             }`}
         >
@@ -41,7 +41,7 @@ const Sidebar = ({ isBarOpen, closeBar }) => {
                         <div className="border-b pb-4 mb-4">
                             <a href="#" className="outline-none">
                                 <img
-                                    src="/src/assets/film-logo-no-text.png"
+                                    src="/assets/film-logo-no-text.png"
                                     alt="site logo"
                                     className="mx-auto h-8"
                                 />

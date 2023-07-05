@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,6 +22,7 @@ const Navbar = () => {
                 isBarOpen={sidebarState}
                 closeBar={() => setSidebarState(false)}
             />
+
             <div className="flex relative items-center pt-2 justify-between">
                 <FontAwesomeIcon
                     icon={faBars}
@@ -29,7 +32,7 @@ const Navbar = () => {
 
                 <div className="flex mx-auto px-2">
                     <img
-                        src="/src/assets/film-logo02.png"
+                        src="/assets/film-logo02.png"
                         alt="Film Logo"
                         className="w-48"
                     />
@@ -42,6 +45,7 @@ const Navbar = () => {
                 </div>
             </div>
 
+            {/* MAKE IT A SEPARATE COMPONENT &&  DECIDE WHERE IT'S BETTER TO USE IT (MAYBE JUST USE IT IN HOME PAGE?)*/}
             <div className="relative group text-sm text-neutral-700 my-3 flex-grow">
                 <FontAwesomeIcon
                     icon={faMagnifyingGlass}
