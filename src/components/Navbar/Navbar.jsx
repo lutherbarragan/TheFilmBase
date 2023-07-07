@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../Sidebar/Sidebar";
@@ -19,9 +20,12 @@ const Navbar = () => {
                 </div>
 
                 <div>
-                    <span className="w-7 h-7 flex justify-center items-center bg-neutral-800 text-neutral-600 rounded-full">
+                    <Link
+                        href="/profile"
+                        className="w-7 h-7 flex justify-center items-center bg-neutral-800 text-neutral-600 rounded-full"
+                    >
                         <FontAwesomeIcon icon={faUser} />
-                    </span>
+                    </Link>
                 </div>
             </div>
 
