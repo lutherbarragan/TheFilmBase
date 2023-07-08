@@ -1,11 +1,26 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import supabase from "@/config/dbConnection";
 import Button from "@/components/Button/Button";
 
 export default function Profile() {
     const [user, setUser] = useState({});
+
+    const router = useRouter();
+
+    async function signOutUser() {
+        const { error } = await supabase.auth.signOut();
+
+        if (error) {
+            alert("Error while signing out");
+            console.log(error);
+            return;
+        }
+
+        router.push("/sign-in");
+    }
 
     useEffect(() => {
         async function getUserData() {
@@ -35,7 +50,9 @@ export default function Profile() {
                 <p>Member since {user.created_at?.split("T")[0]}</p>
             </div>
 
-            <Button className="w-full mt-16">Log Out</Button>
+            <Button onClick={() => signOutUser()} className="w-full mt-16">
+                Log Out
+            </Button>
         </div>
     );
 }
