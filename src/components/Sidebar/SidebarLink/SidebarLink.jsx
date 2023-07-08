@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default ({ children, to }) => {
+const SidebarLink = ({ children, to, setIsSidebarOpen }) => {
     const pathname = usePathname();
     return (
         <Link
+            onClick={() => {
+                setIsSidebarOpen(false);
+            }}
             href={to}
             className={`mb-3 block duration-200 outline-none
             hover:text-red-600 
@@ -22,3 +25,5 @@ export default ({ children, to }) => {
         </Link>
     );
 };
+
+export default SidebarLink;
