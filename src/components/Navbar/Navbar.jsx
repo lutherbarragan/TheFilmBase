@@ -1,14 +1,13 @@
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import ProfileIcon from "../profileIcon/profileIcon";
 import Sidebar from "../Sidebar/Sidebar";
-import "./Navbar.css";
 import Searchbar from "../Searchbar/Searchbar";
+
+import "./Navbar.css";
 
 const Navbar = () => {
     return (
         <nav>
-            <div className="flex items-center pt-2 justify-between">
+            <div className="flex items-center justify-between pt-2">
                 <Sidebar />
 
                 <div className="mx-auto">
@@ -19,14 +18,7 @@ const Navbar = () => {
                     />
                 </div>
 
-                <div>
-                    <Link
-                        href="/profile"
-                        className="w-7 h-7 flex justify-center items-center bg-neutral-800 text-neutral-600 rounded-full"
-                    >
-                        <FontAwesomeIcon icon={faUser} />
-                    </Link>
-                </div>
+                <ProfileIcon className="w-8 h-8" />
             </div>
 
             <Searchbar />

@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+
+import ProfileIcon from "../profileIcon/profileIcon";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faHouse,
@@ -49,16 +52,15 @@ const Sidebar = () => {
                     <div className="h-full flex flex-col justify-between">
                         <div>
                             <div
-                                className="border-b pb-4 mb-4"
+                                className="border-b mb-4"
                                 onClick={() => setIsSidebarOpen(false)}
                             >
-                                <Link href="/" className="outline-none">
-                                    <img
-                                        src="/assets/film-logo-no-text.png"
-                                        alt="site logo"
-                                        className="mx-auto h-8"
-                                    />
-                                </Link>
+                                <div className="flex flex-col justify-center items-center">
+                                    <ProfileIcon className="w-12 h-12 text-2xl mb-1" />
+                                    <Link href="/sign-in" className="mb-4">
+                                        Sign in
+                                    </Link>
+                                </div>
                             </div>
                             <div>
                                 <h2 className="font-semibold mb-3">MENU</h2>
@@ -159,17 +161,6 @@ const Sidebar = () => {
                                     />
                                     Rated
                                 </SidebarLink>
-
-                                <SidebarLink
-                                    to="/downloads"
-                                    setIsSidebarOpen={setIsSidebarOpen}
-                                >
-                                    <FontAwesomeIcon
-                                        icon={faDownload}
-                                        className="mr-2"
-                                    />
-                                    Downloads
-                                </SidebarLink>
                             </div>
 
                             <div>
@@ -201,8 +192,14 @@ const Sidebar = () => {
                         </div>
 
                         <Button className="w-full mt-8">
-                            <span className="mr-2">Log Out</span>
-                            <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                            <span className="mr-2">Sign in</span>
+                            {false ? (
+                                <FontAwesomeIcon
+                                    icon={faArrowRightFromBracket}
+                                />
+                            ) : (
+                                ""
+                            )}
                         </Button>
                     </div>
                 </div>

@@ -1,12 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import supabase from "./dbConnection";
 
 const DBTestConnection = () => {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
     const [fetchError, setFetchError] = useState(null);
     const [formError, setformError] = useState(null);
     const [deleteError, setDeleteError] = useState(null);
@@ -73,7 +69,7 @@ const DBTestConnection = () => {
 
     return (
         <div>
-            <h1>SUPABASE MOUNTED SUCCESSFULLY</h1>
+            <h1>supabase MOUNTED SUCCESSFULLY</h1>
 
             <form onSubmit={submitMovie}>
                 <div className="flex justify-between items-center rounded-sm overflow-hidden my-2">
