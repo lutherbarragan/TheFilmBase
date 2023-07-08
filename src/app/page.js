@@ -1,4 +1,4 @@
-import DBTestConnection from "./config/DBTestConnection";
+import DBTestConnection from "../config/DBTestConnection";
 
 export default function Home() {
     return (

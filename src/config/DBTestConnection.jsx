@@ -8,12 +8,32 @@ const DBTestConnection = () => {
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     const [fetchError, setFetchError] = useState(null);
+    const [formError, setformError] = useState(null);
+    const [deleteError, setDeleteError] = useState(null);
+
     const [movies, setMovies] = useState(null);
-
     const [title, setTitle] = useState("");
-    const [formError, setformError] = useState("");
 
-    const handleSubmit = async (e) => {
+    useEffect(() => {
+        fetchMovies();
+    }, []);
+
+    const fetchMovies = async () => {
+        const { data, error } = await supabase.from("movies").select();
+
+        if (error) {
+            setFetchError("Could not fetch movies");
+            setMovies(null);
+            console.log(error);
+        }
+        if (data) {
+            console.log(data);
+            setMovies(data);
+            setFetchError(null);
+        }
+    };
+
+    const submitMovie = async (e) => {
         e.preventDefault();
 
         if (!title) {
@@ -22,7 +42,6 @@ const DBTestConnection = () => {
         }
 
         console.log(title);
-        const today = new Date();
         const { data, error } = await supabase
             .from("movies")
             .insert([{ title }])
@@ -41,29 +60,22 @@ const DBTestConnection = () => {
         }
     };
 
-    const fetchMovies = async () => {
-        const { data, error } = await supabase.from("movies").select();
+    const deleteMovie = async (id) => {
+        const { error } = await supabase.from("movies").delete().eq("id", id);
 
         if (error) {
-            setFetchError("Could not fetch movies");
-            setMovies(null);
+            setDeleteError(`Could not delete movie ID:${id}`);
             console.log(error);
-        }
-        if (data) {
-            setMovies(data);
-            setFetchError(null);
+        } else {
+            fetchMovies();
         }
     };
-
-    useEffect(() => {
-        fetchMovies();
-    }, []);
 
     return (
         <div>
             <h1>SUPABASE MOUNTED SUCCESSFULLY</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={submitMovie}>
                 <div className="flex justify-between items-center rounded-sm overflow-hidden my-2">
                     <input
                         className="flex-grow pl-5 text-black"
@@ -80,6 +92,7 @@ const DBTestConnection = () => {
             </form>
 
             {fetchError && <p>{fetchError}</p>}
+            {deleteError && <p>{deleteError}</p>}
             {movies && (
                 <div>
                     {movies.map((movie) => (
@@ -89,7 +102,7 @@ const DBTestConnection = () => {
                         >
                             <p>{movie.title}</p>
                             <button
-                                onClick={() => console.log("DELETE MOVIE")}
+                                onClick={() => deleteMovie(movie.id)}
                                 className="bg-red-500 px-3"
                             >
                                 X
