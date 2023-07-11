@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import useUserStore, { signOutUser } from "@/config/store";
 import Button from "@/components/Button/Button";
 import { useEffect } from "react";
+import ProfileIcon from "@/components/profileIcon/profileIcon";
 
 export default function Profile() {
     const router = useRouter();
@@ -23,12 +24,7 @@ export default function Profile() {
 
     return (
         <div className="text-center pt-6">
-            <div className="mx-auto w-28 mb-2">
-                <img
-                    src="/assets/default-profile-img.png"
-                    alt="Profile image"
-                />
-            </div>
+            <ProfileIcon className="mx-auto w-32 h-32 text-2xl mb-1" />
 
             <p className="font-semibold text-xl mb-6">@USERNAME</p>
 

@@ -18,7 +18,7 @@ const Navbar = () => {
                     />
                 </div>
 
-                <ProfileIcon className="w-8 h-8" />
+                <ProfileIcon className="w-9 h-9" />
             </div>
 
             <Searchbar />
