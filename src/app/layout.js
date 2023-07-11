@@ -1,8 +1,6 @@
 import Navbar from "@/components/Navbar/Navbar";
 
 import { StoreInitializer } from "@/config/storeInitializer";
-import supabase from "@/config/dbConnection";
-import { useUserStore } from "@/config/store";
 
 import "./globals.css";
 

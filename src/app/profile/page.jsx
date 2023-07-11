@@ -1,37 +1,28 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import supabase from "@/config/dbConnection";
-import { useUserStore } from "@/config/store";
-
+import useUserStore, { signOutUser } from "@/config/store";
 import Button from "@/components/Button/Button";
+import { useEffect } from "react";
 
 export default function Profile() {
     const router = useRouter();
+    const isAuth = useUserStore((state) => state.signedIn);
 
-    function removeStateData() {
-        const user = {
-            id: "",
-            email: "",
-            username: "",
-            created_at: "",
-            signedIn: false,
-        };
+    useEffect(() => {
+        if (!isAuth) {
+            router.push("/login");
+        }
+    }, []);
 
-        useUserStore.setState({ ...user });
-    }
-
-    async function signOutUser() {
-        const { error } = await supabase.auth.signOut();
-        console.log("SIGNED OUT SUCCESSFUL");
-
-        removeStateData();
+    const logOut = () => {
+        signOutUser();
         router.push("/login");
-    }
+        console.log("LOG OUT SUCCESSFUL");
+    };
 
-    const dynamicContent = (
-        <>
+    return (
+        <div className="text-center pt-6">
             <div className="mx-auto w-28 mb-2">
                 <img
                     src="/assets/default-profile-img.png"
@@ -50,19 +41,9 @@ export default function Profile() {
                 </p>
             </div>
 
-            <Button onClick={() => signOutUser()} className="w-full mt-16">
+            <Button onClick={() => logOut()} className="w-full mt-16">
                 Log Out
             </Button>
-        </>
+        </div>
     );
-
-    if (useUserStore((state) => state.signedIn)) {
-        return <div className="text-center pt-6">{dynamicContent}</div>;
-    } else {
-        return (
-            <div className="text-center pt-6">
-                <h1 className="text-2xl font-semibold">PLEASE LOG IN</h1>
-            </div>
-        );
-    }
 }

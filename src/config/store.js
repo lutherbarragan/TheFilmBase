@@ -1,8 +1,8 @@
 "use client";
-
 import { create } from "zustand";
+import supabase from "@/config/dbConnection";
 
-export const useUserStore = create((set) => ({
+const useUserStore = create((set) => ({
     id: "",
     username: "",
     email: "",
@@ -11,4 +11,31 @@ export const useUserStore = create((set) => ({
     setSignedIn: (isSignedIn) => set({ isSignedIn }),
 }));
 
-export const authStore = create((set) => false);
+function removeStateData() {
+    const user = {
+        id: "",
+        email: "",
+        username: "",
+        created_at: "",
+        signedIn: false,
+    };
+
+    useUserStore.setState({ ...user });
+    console.log("REMOVED SESSION DATA SUCCESSFULLY");
+}
+
+export async function getUserData() {
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+
+    return user;
+}
+
+export async function signOutUser() {
+    const { error } = await supabase.auth.signOut();
+    console.log("SIGNED OUT SUCCESSFUL");
+    removeStateData();
+}
+
+export default useUserStore;

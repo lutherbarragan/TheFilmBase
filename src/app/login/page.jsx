@@ -1,21 +1,21 @@
 "use client";
-import { useState, useEffect } from "react";
+
 import { useRouter } from "next/navigation";
 import supabase from "@/config/dbConnection";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { useUserStore } from "@/config/store";
+import useUserStore, { getUserData } from "@/config/store";
+import { useEffect } from "react";
 
 export default function Login() {
     const router = useRouter();
+    const isAuth = useUserStore((state) => state.signedIn);
 
-    async function getUserData() {
-        const {
-            data: { user },
-        } = await supabase.auth.getUser();
-
-        return user;
-    }
+    useEffect(() => {
+        if (isAuth) {
+            router.push("/profile");
+        }
+    }, []);
 
     supabase.auth.onAuthStateChange((event) => {
         if (event == "SIGNED_IN") {
@@ -36,7 +36,6 @@ export default function Login() {
 
     return (
         <div className="text-center pt-4">
-            <button onClick={() => (authStatus = true)}>change auth</button>
             <Auth
                 supabaseClient={supabase}
                 appearance={{

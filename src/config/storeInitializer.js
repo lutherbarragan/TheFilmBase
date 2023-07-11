@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useUserStore } from "./store";
+import useUserStore from "./store";
 
 export function StoreInitializer({ user }) {
     const isInitialized = useRef(false);
