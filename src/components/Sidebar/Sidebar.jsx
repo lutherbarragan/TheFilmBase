@@ -57,7 +57,7 @@ const Sidebar = () => {
                             >
                                 <div className="flex flex-col justify-center items-center">
                                     <ProfileIcon className="w-12 h-12 text-2xl mb-1" />
-                                    <Link href="/sign-in" className="mb-4">
+                                    <Link href="/login" className="mb-4">
                                         Sign in
                                     </Link>
                                 </div>
