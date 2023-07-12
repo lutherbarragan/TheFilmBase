@@ -13,7 +13,7 @@ export default () => {
     } else {
         return (
             <Link href="/login">
-                <Button className="text-sm">Sign In</Button>
+                <Button className="text-xs font-bold">Sign In</Button>
             </Link>
         );
     }

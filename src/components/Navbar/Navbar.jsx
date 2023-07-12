@@ -15,7 +15,7 @@ const Navbar = () => {
                     <img
                         src="/assets/film-logo02.png"
                         alt="Film Logo"
-                        className="w-48"
+                        className="w-48 ml-7"
                     />
                 </div>
 
