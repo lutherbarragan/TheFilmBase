@@ -34,9 +34,9 @@ const Sidebar = () => {
     const onClickHandler = () => {
         if (isAuth) {
             signOutUser();
-            router.push("/login");
-            setIsSidebarOpen(false);
         }
+        router.push("/login");
+        setIsSidebarOpen(false);
     };
 
     return (

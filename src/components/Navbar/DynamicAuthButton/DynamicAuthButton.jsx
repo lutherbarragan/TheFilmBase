@@ -2,6 +2,7 @@
 import Link from "next/link";
 import useUserStore from "@/config/store";
 
+import AuthButton from "@/components/AuthButton/AuthButton";
 import Button from "@/components/Button/Button";
 import ProfileIcon from "@/components/profileIcon/profileIcon";
 
