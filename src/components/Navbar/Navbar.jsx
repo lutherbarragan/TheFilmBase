@@ -1,6 +1,7 @@
-import ProfileIcon from "../profileIcon/profileIcon";
 import Sidebar from "../Sidebar/Sidebar";
 import Searchbar from "../Searchbar/Searchbar";
+
+import DynamicAuthButton from "./DynamicAuthButton/DynamicAuthButton";
 
 import "./Navbar.css";
 
@@ -18,7 +19,7 @@ const Navbar = () => {
                     />
                 </div>
 
-                <ProfileIcon className="w-9 h-9" />
+                <DynamicAuthButton />
             </div>
 
             <Searchbar />

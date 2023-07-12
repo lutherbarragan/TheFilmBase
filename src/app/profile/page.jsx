@@ -1,24 +1,28 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import useUserStore, { signOutUser } from "@/config/store";
-import Button from "@/components/Button/Button";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+import useUserStore, { signOutUser } from "@/config/store";
+
 import ProfileIcon from "@/components/profileIcon/profileIcon";
+import Button from "@/components/Button/Button";
+import AuthButton from "@/components/AuthButton/AuthButton";
 
 export default function Profile() {
     const router = useRouter();
-    const isAuth = useUserStore((state) => state.signedIn);
+    let isAuth = useUserStore((state) => state.signedIn);
 
     useEffect(() => {
         if (!isAuth) {
             router.push("/login");
+            console.log("Use Effect");
         }
-    }, []);
+    }, [isAuth]);
 
-    const logOut = () => {
+    const signOutHandler = () => {
         signOutUser();
-        router.push("/login");
+        isAuth = false;
         console.log("LOG OUT SUCCESSFUL");
     };
 
@@ -36,10 +40,7 @@ export default function Profile() {
                     {useUserStore((state) => state.created_at.split("T")[0])}
                 </p>
             </div>
-
-            <Button onClick={() => logOut()} className="w-full mt-16">
-                Log Out
-            </Button>
+            <AuthButton isAuth={isAuth} onClick={signOutHandler} />
         </div>
     );
 }

@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import useUserStore, { signOutUser } from "@/config/store";
 
 import ProfileIcon from "../profileIcon/profileIcon";
 
@@ -15,18 +18,27 @@ import {
     faBookmark,
     faList,
     faStar,
-    faDownload,
     faGear,
     faCircleQuestion,
-    faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
 import SidebarIcon from "./SidebarIcon/SidebarIcon";
 import SidebarLink from "./SidebarLink/SidebarLink";
-import Button from "../Button/Button";
+import AuthButton from "../AuthButton/AuthButton";
 
 const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const isAuth = useUserStore((state) => state.signedIn);
+    const router = useRouter();
+
+    const onClickHandler = () => {
+        if (isAuth) {
+            signOutUser();
+        } else {
+            router.push("/login");
+            setIsSidebarOpen(false);
+        }
+    };
 
     return (
         <div>
@@ -55,11 +67,13 @@ const Sidebar = () => {
                                 className="border-b mb-4"
                                 onClick={() => setIsSidebarOpen(false)}
                             >
-                                <div className="flex flex-col justify-center items-center">
-                                    <ProfileIcon className="w-12 h-12 text-2xl mb-1" />
-                                    <Link href="/login" className="mb-4">
-                                        Sign in
-                                    </Link>
+                                <div className="flex flex-col justify-center items-center mb-4">
+                                    <ProfileIcon className="w-14 h-14 text-2xl mb-1" />
+                                    {isAuth ? (
+                                        <></>
+                                    ) : (
+                                        <Link href="/login">Sign in</Link>
+                                    )}
                                 </div>
                             </div>
                             <div>
@@ -190,17 +204,7 @@ const Sidebar = () => {
                                 </SidebarLink>
                             </div>
                         </div>
-
-                        <Button className="w-full mt-8">
-                            <span className="mr-2">Sign in</span>
-                            {false ? (
-                                <FontAwesomeIcon
-                                    icon={faArrowRightFromBracket}
-                                />
-                            ) : (
-                                ""
-                            )}
-                        </Button>
+                        <AuthButton isAuth={isAuth} onClick={onClickHandler} />
                     </div>
                 </div>
             </div>

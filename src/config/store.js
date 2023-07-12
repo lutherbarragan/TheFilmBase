@@ -33,9 +33,14 @@ export async function getUserData() {
 }
 
 export async function signOutUser() {
-    const { error } = await supabase.auth.signOut();
-    console.log("SIGNED OUT SUCCESSFUL");
     removeStateData();
+
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+        console.log(error);
+    }
+
+    console.log("SIGNED OUT SUCCESSFUL");
 }
 
 export default useUserStore;

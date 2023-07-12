@@ -9,13 +9,14 @@ import { useEffect } from "react";
 
 export default function Login() {
     const router = useRouter();
-    const isAuth = useUserStore((state) => state.signedIn);
+    let isAuth = useUserStore((state) => state.signedIn);
 
     useEffect(() => {
         if (isAuth) {
             router.push("/profile");
+            console.log("Use Effect");
         }
-    }, []);
+    }, [isAuth]);
 
     supabase.auth.onAuthStateChange((event) => {
         if (event == "SIGNED_IN") {
@@ -29,7 +30,8 @@ export default function Login() {
                     signedIn: true,
                 };
                 useUserStore.setState({ ...user });
-                router.push("/profile");
+                // router.push("/profile");
+                isAuth = true;
             });
         }
     });
