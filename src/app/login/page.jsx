@@ -14,13 +14,12 @@ export default function Login() {
     useEffect(() => {
         if (isAuth) {
             router.push("/profile");
-            console.log("Use Effect");
+            console.log("LOGIN PAGE: Use Effect()");
         }
     }, [isAuth]);
 
     supabase.auth.onAuthStateChange((event) => {
         if (event == "SIGNED_IN") {
-            console.log("SIGNED IN SUCCESSFUL");
             getUserData().then((res) => {
                 const user = {
                     id: res.id,
@@ -30,7 +29,6 @@ export default function Login() {
                     signedIn: true,
                 };
                 useUserStore.setState({ ...user });
-                // router.push("/profile");
                 isAuth = true;
             });
         }
