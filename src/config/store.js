@@ -43,4 +43,26 @@ export async function signOutUser() {
     console.log("SIGNED OUT SUCCESSFUL");
 }
 
+export async function getSession() {
+    console.log("===================[GET SESSION]===================");
+    const { data, error } = await supabase.auth.getSession();
+
+    console.log(data);
+
+    if (data.session) {
+        const user = data.session.user;
+        const userData = {
+            id: user.id,
+            email: user.email,
+            username: user.username,
+            created_at: user.created_at,
+            signedIn: true,
+        };
+
+        useUserStore.setState({ ...userData });
+        return userData;
+    }
+    return null;
+}
+
 export default useUserStore;

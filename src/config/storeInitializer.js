@@ -1,17 +1,16 @@
 "use client";
 
 import { useRef } from "react";
-import useUserStore from "./store";
+import useUserStore, { getSession } from "./store";
 
-export function StoreInitializer({ user }) {
+export function StoreInitializer() {
     const isInitialized = useRef(false);
 
-    if (!isInitialized.current) {
-        useUserStore.setState({
-            ...user,
-        });
-        isInitialized.current = true;
-    }
-    console.log(useUserStore());
-    return null;
+    const userData = getSession();
+    console.log(userData);
+
+    // useUserStore.setState({ ...userData });
+    isInitialized.current = true;
+    console.log("INITIALIZED SUCCESSFUL");
+    return;
 }
