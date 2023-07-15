@@ -19,16 +19,10 @@ export default function Login() {
     }, [isAuth]);
 
     supabase.auth.onAuthStateChange((event) => {
+        console.log(event);
         if (event == "SIGNED_IN") {
             getUserData().then((res) => {
-                const user = {
-                    id: res.id,
-                    email: res.email,
-                    username: res.username,
-                    created_at: res.created_at,
-                    signedIn: true,
-                };
-                useUserStore.setState({ ...user });
+                useUserStore.setState({ signedIn: true });
                 isAuth = true;
             });
         }
@@ -50,7 +44,7 @@ export default function Login() {
                     },
                 }}
                 theme="dark"
-                providers={["google", "facebook"]}
+                providers={[]}
             />
         </div>
     );

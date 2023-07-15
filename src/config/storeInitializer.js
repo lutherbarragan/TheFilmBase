@@ -6,6 +6,7 @@ import useUserStore, { getSession } from "./store";
 export function StoreInitializer() {
     const isInitialized = useRef(false);
 
+    // initialize userStore here, {} if no session, {...data} if session ???
     const userData = getSession();
     console.log(userData);
 

@@ -3,12 +3,21 @@
 import useUserStore from "@/config/store";
 import Link from "next/link";
 
+import { useState, useEffect } from "react";
+
 const ProfileIcon = ({ className }) => {
+    const [linkUrl, setLinkUrl] = useState("/login");
+    const [profileSrc, setProfileSrc] = useState(
+        "/assets/default-profile-offline.png"
+    );
     const isAuth = useUserStore((state) => state.signedIn);
-    const linkUrl = isAuth ? "/profile" : "/login";
-    const profileSrc = isAuth
-        ? "/assets/default-profile.png"
-        : "/assets/default-profile-offline.png";
+
+    useEffect(() => {
+        if (isAuth) {
+            setLinkUrl("/profile");
+            setProfileSrc("/assets/default-profile-online.png");
+        }
+    }, [isAuth]);
 
     return (
         <Link

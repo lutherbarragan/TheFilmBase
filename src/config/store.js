@@ -3,10 +3,6 @@ import { create } from "zustand";
 import supabase from "@/config/dbConnection";
 
 const useUserStore = create((set) => ({
-    id: "",
-    username: "",
-    email: "",
-    created_at: "",
     signedIn: false,
     setSignedIn: (isSignedIn) => set({ isSignedIn }),
 }));
@@ -44,25 +40,13 @@ export async function signOutUser() {
 }
 
 export async function getSession() {
-    console.log("===================[GET SESSION]===================");
     const { data, error } = await supabase.auth.getSession();
-
+    console.log("===================[GET SESSION]===================");
     console.log(data);
-
     if (data.session) {
-        const user = data.session.user;
-        const userData = {
-            id: user.id,
-            email: user.email,
-            username: user.username,
-            created_at: user.created_at,
-            signedIn: true,
-        };
-
-        useUserStore.setState({ ...userData });
-        return userData;
+        useUserStore.setState({ signedIn: true });
     }
-    return null;
+    return false;
 }
 
 export default useUserStore;
