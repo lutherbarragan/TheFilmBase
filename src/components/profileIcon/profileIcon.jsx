@@ -16,6 +16,9 @@ const ProfileIcon = ({ className }) => {
         if (isAuth) {
             setLinkUrl("/profile");
             setProfileSrc("/assets/default-profile-online.png");
+        } else {
+            setLinkUrl("/login");
+            setProfileSrc("/assets/default-profile-offline.png");
         }
     }, [isAuth]);
 

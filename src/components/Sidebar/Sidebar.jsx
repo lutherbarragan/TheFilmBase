@@ -1,13 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 import useUserStore, { signOutUser } from "@/config/store";
-
 import ProfileIcon from "../profileIcon/profileIcon";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faHouse,
@@ -21,15 +18,25 @@ import {
     faGear,
     faCircleQuestion,
 } from "@fortawesome/free-solid-svg-icons";
-
 import SidebarIcon from "./SidebarIcon/SidebarIcon";
 import SidebarLink from "./SidebarLink/SidebarLink";
 import AuthButton from "../AuthButton/AuthButton";
 
 const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [signInText, setSignInText] = useState("Sign in");
+    const [profileImageTextURL, setProfileImageTextURL] = useState("/login");
+
     const isAuth = useUserStore((state) => state.signedIn);
     const router = useRouter();
+
+    useEffect(() => {
+        if (isAuth) {
+            setSignInText("");
+        } else {
+            setSignInText("Sign in");
+        }
+    }, [isAuth]);
 
     const onClickHandler = () => {
         if (isAuth) {
@@ -68,11 +75,7 @@ const Sidebar = () => {
                             >
                                 <div className="flex flex-col justify-center items-center mb-4">
                                     <ProfileIcon className="w-14 h-14 text-2xl mb-1" />
-                                    {isAuth ? (
-                                        <></>
-                                    ) : (
-                                        <Link href="/login">Sign in</Link>
-                                    )}
+                                    <Link href="/login">{signInText}</Link>
                                 </div>
                             </div>
                             <div>
