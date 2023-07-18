@@ -78,7 +78,7 @@ export default function Profile() {
             </div>
 
             <AuthDynamicRenderer>
-                <AuthButton onClick={signOutHandler}>Sign In</AuthButton>
+                <></>
 
                 <AuthButton onClick={signOutHandler}>
                     Sign Out
