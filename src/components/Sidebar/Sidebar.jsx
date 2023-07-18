@@ -17,6 +17,7 @@ import {
     faStar,
     faGear,
     faCircleQuestion,
+    faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import SidebarIcon from "./SidebarIcon/SidebarIcon";
 import SidebarLink from "./SidebarLink/SidebarLink";
@@ -24,17 +25,16 @@ import AuthButton from "../AuthButton/AuthButton";
 
 const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [signInText, setSignInText] = useState("Sign in");
-    const [profileImageTextURL, setProfileImageTextURL] = useState("/login");
+    const [authText, setAuthText] = useState("Sign in");
 
     const isAuth = useUserStore((state) => state.signedIn);
     const router = useRouter();
 
     useEffect(() => {
         if (isAuth) {
-            setSignInText("");
+            setAuthText("Sign out");
         } else {
-            setSignInText("Sign in");
+            setAuthText("Sign in");
         }
     }, [isAuth]);
 
@@ -75,7 +75,6 @@ const Sidebar = () => {
                             >
                                 <div className="flex flex-col justify-center items-center mb-4">
                                     <ProfileIcon className="w-14 h-14 text-2xl mb-1" />
-                                    <Link href="/login">{signInText}</Link>
                                 </div>
                             </div>
                             <div>
@@ -206,7 +205,13 @@ const Sidebar = () => {
                                 </SidebarLink>
                             </div>
                         </div>
-                        <AuthButton isAuth={isAuth} onClick={onClickHandler} />
+                        <AuthButton onClick={onClickHandler}>
+                            {authText}
+                            <FontAwesomeIcon
+                                icon={faArrowRightFromBracket}
+                                className="ml-2"
+                            />
+                        </AuthButton>
                     </div>
                 </div>
             </div>

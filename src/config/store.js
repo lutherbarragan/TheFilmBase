@@ -32,6 +32,7 @@ export async function getSession() {
     console.log(data);
     if (data.session) {
         useUserStore.setState({ signedIn: true });
+        return true;
     }
     return false;
 }

@@ -19,7 +19,6 @@ export default function Login() {
     }, [isAuth]);
 
     supabase.auth.onAuthStateChange((event) => {
-        console.log(event);
         if (event == "SIGNED_IN") {
             getUserData().then((res) => {
                 useUserStore.setState({ signedIn: true });

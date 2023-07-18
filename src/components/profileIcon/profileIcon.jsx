@@ -1,8 +1,6 @@
 "use client";
-
 import useUserStore from "@/config/store";
 import Link from "next/link";
-
 import { useState, useEffect } from "react";
 
 const ProfileIcon = ({ className }) => {

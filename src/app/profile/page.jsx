@@ -3,12 +3,16 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faPen } from "@fortawesome/free-solid-svg-icons";
+import {
+    faPen,
+    faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
 import useUserStore, { getUserData, signOutUser } from "@/config/store";
 
 import ProfileIcon from "@/components/profileIcon/profileIcon";
 import AuthButton from "@/components/AuthButton/AuthButton";
+import AuthDynamicRenderer from "@/components/AuthDynamicRenderer/AuthDynamicRenderer";
 import Button from "@/components/Button/Button";
 
 export default function Profile() {
@@ -17,7 +21,7 @@ export default function Profile() {
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [memberSince, setMemberSince] = useState("");
+    const [memberDate, setMemberDate] = useState("");
 
     useEffect(() => {
         if (isAuth) {
@@ -29,12 +33,8 @@ export default function Profile() {
                 };
                 setUsername(data.username);
                 setEmail(data.email);
-                setMemberSince(data.created_at);
+                setMemberDate(data.created_at);
             });
-
-            setUsername("USER NAME");
-            setEmail("USEREMAIL@EMAIL.COM");
-            setMemberSince("DD/MM/YYYY");
         } else {
             router.push("/login");
             console.log("PROFILE PAGE: Use Effect");
@@ -73,10 +73,21 @@ export default function Profile() {
                     <span className="absolute -top-1/3 left-0 text-xs text-neutral-500">
                         Member since
                     </span>
-                    <span className="mr-2">{memberSince}</span>
+                    <span className="mr-2">{memberDate}</span>
                 </p>
             </div>
-            <AuthButton isAuth={isAuth} onClick={signOutHandler} />
+
+            <AuthDynamicRenderer>
+                <AuthButton onClick={signOutHandler}>Sign In</AuthButton>
+
+                <AuthButton onClick={signOutHandler}>
+                    Sign Out
+                    <FontAwesomeIcon
+                        icon={faArrowRightFromBracket}
+                        className="ml-2"
+                    />
+                </AuthButton>
+            </AuthDynamicRenderer>
         </div>
     );
 }

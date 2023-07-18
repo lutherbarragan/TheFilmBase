@@ -1,8 +1,9 @@
 import Sidebar from "../Sidebar/Sidebar";
 import Searchbar from "../Searchbar/Searchbar";
-
-import DynamicAuthButton from "./DynamicAuthButton/DynamicAuthButton";
-
+import Link from "next/link";
+import Button from "../Button/Button";
+import AuthDynamicRenderer from "../AuthDynamicRenderer/AuthDynamicRenderer";
+import ProfileIcon from "../profileIcon/profileIcon";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -18,8 +19,14 @@ const Navbar = () => {
                         className="w-48 ml-5"
                     />
                 </div>
+                {/* <NavbarDynamicContent /> */}
+                <AuthDynamicRenderer>
+                    <Link href="/login">
+                        <Button className="text-xs font-bold">Sign In</Button>
+                    </Link>
 
-                <DynamicAuthButton />
+                    <ProfileIcon className="w-9 h-9" />
+                </AuthDynamicRenderer>
             </div>
 
             <Searchbar />
