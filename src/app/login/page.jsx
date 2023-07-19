@@ -20,9 +20,9 @@ export default function Login() {
 
     supabase.auth.onAuthStateChange((event) => {
         if (event == "SIGNED_IN") {
+            // isAuth = true;
             getUserData().then((res) => {
                 useUserStore.setState({ signedIn: true });
-                isAuth = true;
             });
         }
     });

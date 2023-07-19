@@ -58,5 +58,5 @@ h6 {
 
 body {
     @apply bg-neutral-950 text-white;
-    padding: 0 1rem;
+    /* padding: 1rem; */
 }

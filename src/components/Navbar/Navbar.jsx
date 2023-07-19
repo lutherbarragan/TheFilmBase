@@ -8,8 +8,8 @@ import "./Navbar.css";
 
 const Navbar = () => {
     return (
-        <nav>
-            <div className="flex items-center justify-between pt-2">
+        <nav className="p-4">
+            <div className="flex items-center justify-between">
                 <Sidebar />
 
                 <div className="mx-auto">

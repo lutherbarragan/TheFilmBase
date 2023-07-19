@@ -23,6 +23,21 @@ export default function Profile() {
     const [email, setEmail] = useState("");
     const [memberDate, setMemberDate] = useState("");
 
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+
     useEffect(() => {
         if (isAuth) {
             getUserData().then((res) => {
@@ -33,7 +48,13 @@ export default function Profile() {
                 };
                 setUsername(data.username);
                 setEmail(data.email);
-                setMemberDate(data.created_at);
+                setMemberDate(
+                    `
+                        ${months[data.created_at.split("-")[1] - 1]}
+                        ${data.created_at.split("-")[2]}
+                        ${data.created_at.split("-")[0]}
+                    `
+                );
             });
         } else {
             router.push("/login");

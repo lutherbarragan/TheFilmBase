@@ -7,9 +7,7 @@ export function StoreInitializer() {
     const isInitialized = useRef(false);
 
     const userData = getSession();
-    console.log(userData);
 
     isInitialized.current = true;
-    console.log("INITIALIZED SUCCESSFUL");
     return;
 }

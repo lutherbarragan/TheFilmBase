@@ -28,8 +28,6 @@ export async function signOutUser() {
 
 export async function getSession() {
     const { data, error } = await supabase.auth.getSession();
-    console.log("===================[GET SESSION]===================");
-    console.log(data);
     if (data.session) {
         useUserStore.setState({ signedIn: true });
         return true;
