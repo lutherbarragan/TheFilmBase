@@ -1,53 +1,130 @@
 "use client";
-
 import { useState, useEffect } from "react";
-import { getPopularMovies } from "@/config/API";
+import { getMovieList, getMovieLogo } from "@/config/API";
+
+import React from "react";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faChevronLeft,
+    faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import "./PopularMovies.css";
+import MovieSlide from "./MovieSlide/MovieSlide";
 
 export default function PopularMovies() {
     const [movies, setMovies] = useState([]);
-    const [movieShown, setMovieShown] = useState(0);
+    const [hasMounted, setHasMounted] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+
+    const [sliderRef, instanceRef] = useKeenSlider(
+        {
+            loop: true,
+            created() {
+                setLoaded(true);
+            },
+        },
+        [
+            (slider) => {
+                let timeout;
+                let mouseOver = false;
+                function clearNextTimeout() {
+                    clearTimeout(timeout);
+                }
+                function nextTimeout() {
+                    clearTimeout(timeout);
+                    if (mouseOver) return;
+                    timeout = setTimeout(() => {
+                        slider.next();
+                    }, 3000);
+                }
+                slider.on("created", () => {
+                    slider.container.addEventListener("mouseover", () => {
+                        mouseOver = true;
+                        clearNextTimeout();
+                    });
+                    slider.container.addEventListener("mouseout", () => {
+                        mouseOver = false;
+                        nextTimeout();
+                    });
+                    nextTimeout();
+                });
+                slider.on("dragStarted", clearNextTimeout);
+                slider.on("animationEnded", nextTimeout);
+                slider.on("updated", nextTimeout);
+            },
+        ]
+    );
 
     useEffect(() => {
-        getPopularMovies().then((res) => {
-            setMovies(res.results);
-            console.log(res.results);
-        });
-    }, []);
+        if (!hasMounted) {
+            getMovieList("now_playing").then((res, err) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                if (res?.results) {
+                    const movieSlides = [...res.results].slice(0, 10);
+                    console.log(res);
+                    setMovies(movieSlides);
+                    setHasMounted(true);
+                }
+            });
+        }
+    }, [hasMounted]);
 
-    setInterval(() => {
-        if (movieShown + 1 > movies.length - 1) setMovieShown(0);
-        else setMovieShown(movieShown + 1);
-    }, 5000);
-
+    if (!hasMounted) return <></>;
     return (
-        <div>
-            <div className="relative" key={movies[movieShown]?.id}>
-                <p className="absolute top-2 left-2 text-xl font-semibold">
-                    {movies[movieShown]?.title}
-                </p>
-                <img
-                    src={`https://image.tmdb.org/t/p/original${movies[movieShown]?.backdrop_path}`}
-                    alt="Movie Backdrop"
-                    className="mb-2"
-                />
-            </div>
+        <>
+            <div className="navigation-wrapper relative">
+                <div ref={sliderRef} className="keen-slider">
+                    {movies.map((movie, i) => {
+                        return (
+                            <MovieSlide
+                                movie={movie}
+                                index={i}
+                                key={movie.id}
+                            />
+                        );
+                    })}
+                </div>
 
-            <p className="text-left">POPULAR MOVIES</p>
+                {loaded && instanceRef.current && (
+                    <>
+                        <Arrow
+                            left
+                            onClick={(e) =>
+                                e.stopPropagation() ||
+                                instanceRef.current?.prev()
+                            }
+                        />
 
-            <div className="flex overflow-x-scroll pt-4 pb-20 gap-2">
-                {movies.map((movie) => (
-                    <img
-                        src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
-                        alt="Movie Backdrop"
-                        className={`w-40 duration-300 ${
-                            movies[movieShown]?.id == movie?.id
-                                ? " scale-125 mx-6"
-                                : ""
-                        }`}
-                        key={movie?.id}
-                    />
-                ))}
+                        <Arrow
+                            onClick={(e) =>
+                                e.stopPropagation() ||
+                                instanceRef.current?.next()
+                            }
+                        />
+                    </>
+                )}
             </div>
-        </div>
+        </>
+    );
+}
+
+function Arrow(props) {
+    const disabeld = props.disabled ? " arrow--disabled" : "";
+    return (
+        <span
+            onClick={props.onClick}
+            className={`text-xl arrow ${
+                props.left ? "arrow--left ml-2" : "arrow--right mr-2"
+            } ${disabeld}`}
+        >
+            <FontAwesomeIcon
+                icon={props.left ? faChevronLeft : faChevronRight}
+            />
+        </span>
     );
 }

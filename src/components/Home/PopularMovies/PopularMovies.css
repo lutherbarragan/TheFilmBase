@@ -1,0 +1,68 @@
+[class^="number-slide"],
+[class*=" number-slide"] {
+    /* background: grey; */
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    font-size: 50px;
+    color: #fff;
+    font-weight: 500;
+    /* height: 300px; */
+    width: 100vw;
+    max-height: 100vh;
+}
+
+/*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=ffffff&c2=010101&gt=l&gd=dbr
+*/
+/* background: #FFFFFF;
+background: linear-gradient(315deg, #FFFFFF, #010101); */
+
+.slider_content {
+    @apply bg-zinc-950;
+    background: linear-gradient(
+            to top,
+            rgb(9, 9, 11) 0%,
+            rgb(9, 9, 11, 0.6) 20%,
+            rgba(9, 9, 11, 0) 50%
+        ),
+        linear-gradient(
+            to left,
+            rgb(9, 9, 11, 0.95) 0%,
+            rgb(9, 9, 11, 0.5) 5%,
+            rgba(9, 9, 11, 0.1) 12%,
+            rgba(9, 9, 11, 0) 15%
+        ),
+        linear-gradient(
+            to right,
+            rgb(9, 9, 11, 0.95) 0%,
+            rgb(9, 9, 11, 0.5) 5%,
+            rgba(9, 9, 11, 0.1) 12%,
+            rgba(9, 9, 11, 0) 15%
+        );
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.arrow {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.arrow--left {
+    left: 5px;
+}
+
+.arrow--right {
+    left: auto;
+    right: 5px;
+}
+
+.arrow--disabled {
+    fill: rgba(255, 255, 255, 0.5);
+}

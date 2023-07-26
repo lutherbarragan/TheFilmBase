@@ -63,7 +63,7 @@ const Sidebar = () => {
                 ></div>
 
                 <div
-                    className={`SIDEBAR-BODY relative h-full overflow-y-scroll w-2/5 duration-500 p-4 bg-neutral-900 ${
+                    className={`SIDEBAR-BODY relative h-full overflow-y-scroll w-2/5 duration-500 p-4 bg-zinc-950 ${
                         isSidebarOpen ? "left-0" : "-left-1/2"
                     }`}
                 >

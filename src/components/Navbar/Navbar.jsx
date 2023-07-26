@@ -8,7 +8,7 @@ import "./Navbar.css";
 
 const Navbar = () => {
     return (
-        <nav className="p-4">
+        <nav className="p-4 pb-0">
             <div className="flex items-center justify-between">
                 <Sidebar />
 

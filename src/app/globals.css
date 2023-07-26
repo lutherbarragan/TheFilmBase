@@ -55,8 +55,3 @@ h6 {
 #__next {
     isolation: isolate;
 }
-
-body {
-    @apply bg-neutral-950 text-white;
-    /* padding: 1rem; */
-}
