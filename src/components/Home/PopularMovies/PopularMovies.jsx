@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { getMovieList, getMovieLogo } from "@/config/API";
+import { getMovieList } from "@/config/API";
 
 import React from "react";
 import { useKeenSlider } from "keen-slider/react";

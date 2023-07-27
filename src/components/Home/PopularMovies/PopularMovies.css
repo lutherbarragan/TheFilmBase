@@ -12,35 +12,14 @@
     max-height: 100vh;
 }
 
-/*
-* Created with https://www.css-gradient.com
-* Gradient link: https://www.css-gradient.com/?c1=ffffff&c2=010101&gt=l&gd=dbr
-*/
-/* background: #FFFFFF;
-background: linear-gradient(315deg, #FFFFFF, #010101); */
-
 .slider_content {
     @apply bg-zinc-950;
     background: linear-gradient(
-            to top,
-            rgb(9, 9, 11) 0%,
-            rgb(9, 9, 11, 0.6) 20%,
-            rgba(9, 9, 11, 0) 50%
-        ),
-        linear-gradient(
-            to left,
-            rgb(9, 9, 11, 0.95) 0%,
-            rgb(9, 9, 11, 0.5) 5%,
-            rgba(9, 9, 11, 0.1) 12%,
-            rgba(9, 9, 11, 0) 15%
-        ),
-        linear-gradient(
-            to right,
-            rgb(9, 9, 11, 0.95) 0%,
-            rgb(9, 9, 11, 0.5) 5%,
-            rgba(9, 9, 11, 0.1) 12%,
-            rgba(9, 9, 11, 0) 15%
-        );
+        0deg,
+        rgba(9, 9, 11, 1) 2%,
+        rgba(9, 9, 11, 0.6) 20%,
+        rgba(255, 255, 255, 0) 35%
+    );
 
     background-repeat: no-repeat;
     background-size: cover;
