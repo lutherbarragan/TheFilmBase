@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { getMovieList } from "@/config/API";
+import { getMovieList, getAllTrending } from "@/config/API";
 
 import React from "react";
 import { useKeenSlider } from "keen-slider/react";
@@ -59,7 +59,7 @@ export default function PopularMovies() {
 
     useEffect(() => {
         if (!hasMounted) {
-            getMovieList("now_playing").then((res, err) => {
+            getMovieList("upcoming").then((res, err) => {
                 if (err) {
                     console.log(err);
                     return;
@@ -118,8 +118,10 @@ function Arrow(props) {
     return (
         <span
             onClick={props.onClick}
-            className={`text-xl arrow ${
-                props.left ? "arrow--left ml-2" : "arrow--right mr-2"
+            className={`arrow absolute top-0 text-xl h-full flex items-center pb-8 cursor-pointer ${
+                props.left
+                    ? "arrow--left left-0 px-2"
+                    : "arrow--right right-0 px-2"
             } ${disabeld}`}
         >
             <FontAwesomeIcon
