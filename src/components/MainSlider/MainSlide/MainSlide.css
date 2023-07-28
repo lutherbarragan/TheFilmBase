@@ -1,0 +1,9 @@
+.slider_content {
+    @apply bg-zinc-950;
+    background: linear-gradient(
+        0deg,
+        rgba(9, 9, 11, 1) 2%,
+        rgba(9, 9, 11, 0.6) 20%,
+        rgba(255, 255, 255, 0) 35%
+    );
+}

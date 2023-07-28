@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { getMovieLogo } from "@/config/API";
 
+import "./MainSlide.css";
+
 export default function MovieSlide({ movie, index }) {
     const [backdrop, setBackdrop] = useState(null);
     const [logo, setLogo] = useState(null);
@@ -11,7 +13,6 @@ export default function MovieSlide({ movie, index }) {
     useEffect(() => {
         if (!logo && !backdrop) {
             getMovieLogo(movie.id).then((res) => {
-                console.log(res);
                 setBackdrop(res.backdrops[0].file_path);
 
                 if (res.logos[0]?.file_path) {
@@ -24,7 +25,7 @@ export default function MovieSlide({ movie, index }) {
     return (
         <Link href={`/movies/${movie.id}`}>
             <div
-                className={`keen-slider__slide number-slide${index++} relative bg-black`}
+                className={`keen-slider__slide number-slide${index++} relative w-screen max-h-screen`}
             >
                 <img
                     src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}

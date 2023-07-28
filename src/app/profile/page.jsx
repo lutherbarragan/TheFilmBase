@@ -68,7 +68,7 @@ export default function Profile() {
     };
 
     return (
-        <div className="pt-6">
+        <div className="p-4">
             <ProfileIcon className="mx-auto w-32 h-32 text-2xl mb-1" />
 
             <div className="text-center">

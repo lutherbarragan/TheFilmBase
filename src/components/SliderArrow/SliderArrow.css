@@ -1,0 +1,17 @@
+.arrow--left {
+    @apply bg-zinc-950;
+    background: linear-gradient(
+        to right,
+        rgb(9, 9, 11, 0.7) 0%,
+        rgba(9, 9, 11, 0) 100%
+    );
+}
+
+.arrow--right {
+    @apply bg-zinc-950;
+    background: linear-gradient(
+        to left,
+        rgb(9, 9, 11, 0.7) 0%,
+        rgba(9, 9, 11, 0) 100%
+    );
+}

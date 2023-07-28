@@ -13,14 +13,12 @@ export default function Login() {
 
     useEffect(() => {
         if (isAuth) {
-            router.push("/profile");
-            console.log("LOGIN PAGE: Use Effect()");
+            router.push("/");
         }
     }, [isAuth]);
 
     supabase.auth.onAuthStateChange((event) => {
         if (event == "SIGNED_IN") {
-            // isAuth = true;
             getUserData().then((res) => {
                 useUserStore.setState({ signedIn: true });
             });
@@ -28,7 +26,7 @@ export default function Login() {
     });
 
     return (
-        <div className="text-center pt-4">
+        <div className="text-center p-4">
             <Auth
                 supabaseClient={supabase}
                 appearance={{

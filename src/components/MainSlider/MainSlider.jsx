@@ -5,15 +5,10 @@ import { getMovieList, getAllTrending } from "@/config/API";
 import React from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faChevronLeft,
-    faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-import "./PopularMovies.css";
-import MovieSlide from "./MovieSlide/MovieSlide";
+import MovieSlide from "./MainSlide/MainSlide";
+import SliderArrow from "../SliderArrow/SliderArrow";
 
-export default function PopularMovies() {
+export default function MainSlider() {
     const [movies, setMovies] = useState([]);
     const [hasMounted, setHasMounted] = useState(false);
     const [loaded, setLoaded] = useState(false);
@@ -37,7 +32,7 @@ export default function PopularMovies() {
                     if (mouseOver) return;
                     timeout = setTimeout(() => {
                         slider.next();
-                    }, 3000);
+                    }, 2000);
                 }
                 slider.on("created", () => {
                     slider.container.addEventListener("mouseover", () => {
@@ -66,7 +61,6 @@ export default function PopularMovies() {
                 }
                 if (res?.results) {
                     const movieSlides = [...res.results].slice(0, 10);
-                    console.log(res);
                     setMovies(movieSlides);
                     setHasMounted(true);
                 }
@@ -92,7 +86,7 @@ export default function PopularMovies() {
 
                 {loaded && instanceRef.current && (
                     <>
-                        <Arrow
+                        <SliderArrow
                             left
                             onClick={(e) =>
                                 e.stopPropagation() ||
@@ -100,7 +94,7 @@ export default function PopularMovies() {
                             }
                         />
 
-                        <Arrow
+                        <SliderArrow
                             onClick={(e) =>
                                 e.stopPropagation() ||
                                 instanceRef.current?.next()
@@ -110,23 +104,5 @@ export default function PopularMovies() {
                 )}
             </div>
         </>
-    );
-}
-
-function Arrow(props) {
-    const disabeld = props.disabled ? " arrow--disabled" : "";
-    return (
-        <span
-            onClick={props.onClick}
-            className={`arrow absolute top-0 text-xl h-full flex items-center pb-8 cursor-pointer ${
-                props.left
-                    ? "arrow--left left-0 px-2"
-                    : "arrow--right right-0 px-2"
-            } ${disabeld}`}
-        >
-            <FontAwesomeIcon
-                icon={props.left ? faChevronLeft : faChevronRight}
-            />
-        </span>
     );
 }
