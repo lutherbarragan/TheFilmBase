@@ -3,7 +3,7 @@ import useUserStore from "@/config/store";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-const ProfileIcon = ({ className, size }) => {
+const ProfileIcon = ({ className, size, onClick }) => {
     const [linkUrl, setLinkUrl] = useState("/login");
     const [profileSrc, setProfileSrc] = useState(
         "/assets/default-profile-offline.png"
@@ -31,6 +31,7 @@ const ProfileIcon = ({ className, size }) => {
     return (
         <Link
             href={linkUrl}
+            onClick={onClick}
             className={`flex justify-center items-center rounded-full ${SIZES[size]} ${className}`}
         >
             <img src={profileSrc} alt="profile picture" />

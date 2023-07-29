@@ -71,7 +71,11 @@ const Sidebar = () => {
                     <div className="h-full flex flex-col justify-between">
                         <div>
                             <div className="border-b-2 border-neutral-800 mb-3 pb-3">
-                                <ProfileIcon className="mx-auto" size="md" />
+                                <ProfileIcon
+                                    className="mx-auto"
+                                    size="md"
+                                    onClick={() => setIsSidebarOpen(false)}
+                                />
                             </div>
 
                             <LinksArea title="MENU">
