@@ -69,7 +69,7 @@ export default function Profile() {
 
     return (
         <div className="p-4">
-            <ProfileIcon className="mx-auto w-32 h-32 text-2xl mb-1" />
+            <ProfileIcon size="xl" className="mx-auto mb-1" />
 
             <div className="text-center">
                 <span className="group inline-block font-semibold text-lg text-neutral-200 mb-6 mx-auto relative hover:cursor-pointer">

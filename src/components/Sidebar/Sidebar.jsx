@@ -20,6 +20,7 @@ import {
     faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import SidebarIcon from "./SidebarIcon/SidebarIcon";
+import LinksArea from "./LinksArea/LinksArea";
 import SidebarLink from "./SidebarLink/SidebarLink";
 import AuthButton from "../AuthButton/AuthButton";
 
@@ -51,7 +52,7 @@ const Sidebar = () => {
             <SidebarIcon setIsSidebarOpen={setIsSidebarOpen} />
 
             <div
-                className={`SIDEBAR z-50 absolute top-0 w-full h-full -left-full min-h-screen ${
+                className={`SIDEBAR z-50 fixed top-0 w-full h-full -left-full min-h-screen ${
                     isSidebarOpen ? "left-0" : "-left-full duration-1000"
                 }`}
             >
@@ -63,22 +64,17 @@ const Sidebar = () => {
                 ></div>
 
                 <div
-                    className={`SIDEBAR-BODY relative h-full overflow-y-scroll w-2/5 duration-500 p-4 bg-zinc-950 ${
+                    className={`SIDEBAR-BODY relative h-full overflow-y-scroll w-2/5 duration-500 px-4 py-2 sm:py-4 bg-zinc-950 ${
                         isSidebarOpen ? "left-0" : "-left-1/2"
                     }`}
                 >
                     <div className="h-full flex flex-col justify-between">
                         <div>
-                            <div
-                                className="border-b mb-4"
-                                onClick={() => setIsSidebarOpen(false)}
-                            >
-                                <div className="flex flex-col justify-center items-center mb-4">
-                                    <ProfileIcon className="w-14 h-14 text-2xl mb-1" />
-                                </div>
+                            <div className="border-b-2 border-neutral-800 mb-3 pb-3">
+                                <ProfileIcon className="mx-auto" size="md" />
                             </div>
-                            <div>
-                                <h2 className="font-semibold mb-3">MENU</h2>
+
+                            <LinksArea title="MENU">
                                 <SidebarLink
                                     to="/"
                                     setIsSidebarOpen={setIsSidebarOpen}
@@ -100,12 +96,9 @@ const Sidebar = () => {
                                     />
                                     Discover
                                 </SidebarLink>
-                            </div>
+                            </LinksArea>
 
-                            <div>
-                                <h2 className="font-semibold mt-8 mb-3">
-                                    CATEGORY
-                                </h2>
+                            <LinksArea title="CATEGORY">
                                 <SidebarLink
                                     to="/movies"
                                     setIsSidebarOpen={setIsSidebarOpen}
@@ -127,12 +120,9 @@ const Sidebar = () => {
                                     />
                                     Shows
                                 </SidebarLink>
-                            </div>
+                            </LinksArea>
 
-                            <div>
-                                <h2 className="font-semibold mt-8 mb-3">
-                                    LIBRARY
-                                </h2>
+                            <LinksArea title="LIBRARY">
                                 <SidebarLink
                                     to="/recent"
                                     setIsSidebarOpen={setIsSidebarOpen}
@@ -176,12 +166,9 @@ const Sidebar = () => {
                                     />
                                     Rated
                                 </SidebarLink>
-                            </div>
+                            </LinksArea>
 
-                            <div>
-                                <h2 className="font-semibold mt-8 mb-3">
-                                    GENERAL
-                                </h2>
+                            <LinksArea title="GENERAL">
                                 <SidebarLink
                                     to="/settings"
                                     setIsSidebarOpen={setIsSidebarOpen}
@@ -203,14 +190,12 @@ const Sidebar = () => {
                                     />
                                     Help
                                 </SidebarLink>
-                            </div>
+                            </LinksArea>
                         </div>
+
                         <AuthButton onClick={onClickHandler}>
-                            {authText}
-                            <FontAwesomeIcon
-                                icon={faArrowRightFromBracket}
-                                className="ml-2"
-                            />
+                            <span className="mr-2">{authText}</span>
+                            <FontAwesomeIcon icon={faArrowRightFromBracket} />
                         </AuthButton>
                     </div>
                 </div>

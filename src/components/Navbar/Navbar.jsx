@@ -25,7 +25,7 @@ const Navbar = () => {
                         <Button className="text-xs font-bold">Sign In</Button>
                     </Link>
 
-                    <ProfileIcon className="w-9 h-9" />
+                    <ProfileIcon size="sm" />
                 </AuthDynamicRenderer>
             </div>
 

@@ -9,7 +9,7 @@ const SidebarLink = ({ children, to, setIsSidebarOpen }) => {
                 setIsSidebarOpen(false);
             }}
             href={to}
-            className={`mb-3 block duration-200 outline-none
+            className={`mb-2 block duration-200 outline-none
             hover:text-red-600 
             hover:cursor-pointer 
             focus:text-red-600 
@@ -21,7 +21,7 @@ const SidebarLink = ({ children, to, setIsSidebarOpen }) => {
                     : "text-neutral-400"
             }`}
         >
-            <p>{children}</p>
+            {children}
         </Link>
     );
 };
