@@ -21,14 +21,13 @@ const isRouteValid = () => {
 };
 
 export default function Searchbar() {
-    if (!isRouteValid()) {
-        return "";
-    } else
-        return (
-            <div className="relative group text-sm text-neutral-700 my-3 flex-grow">
-                <FontAwesomeIcon
-                    icon={faMagnifyingGlass}
-                    className="absolute 
+    if (!isRouteValid()) return <></>;
+
+    return (
+        <div className="relative group text-sm text-neutral-700 my-3 flex-grow">
+            <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="absolute 
                     top-1/2 
                     right-0
                     pr-0.5
@@ -42,11 +41,11 @@ export default function Searchbar() {
                     group-active:text-red-700
                     group-focus-within:text-red-700
                     "
-                />
-                <input
-                    type="text"
-                    placeholder="Search movies, TV shows, series..."
-                    className="
+            />
+            <input
+                type="text"
+                placeholder="Search movies, TV shows, series..."
+                className="
                     SearchBarInput
                     pl-2
                     pr-8
@@ -60,7 +59,7 @@ export default function Searchbar() {
                   group-active:text-neutral-400 group-active:border-neutral-400 
                   group-focus-within:text-neutral-400 group-focus-within:border-neutral-400
                     "
-                />
-            </div>
-        );
+            />
+        </div>
+    );
 }

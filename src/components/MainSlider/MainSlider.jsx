@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { getMovieList, getAllTrending } from "@/config/API";
+import { getList, getAllTrending } from "@/config/API";
 
 import React from "react";
 import { useKeenSlider } from "keen-slider/react";
@@ -8,7 +8,7 @@ import "keen-slider/keen-slider.min.css";
 import MovieSlide from "./MainSlide/MainSlide";
 import SliderArrow from "../SliderArrow/SliderArrow";
 
-export default function MainSlider() {
+export default function MainSlider({ mediaType, listName }) {
     const [movies, setMovies] = useState([]);
     const [hasMounted, setHasMounted] = useState(false);
     const [loaded, setLoaded] = useState(false);
@@ -54,7 +54,7 @@ export default function MainSlider() {
 
     useEffect(() => {
         if (!hasMounted) {
-            getMovieList("upcoming").then((res, err) => {
+            getList(mediaType, listName).then((res, err) => {
                 if (err) {
                     console.log(err);
                     return;

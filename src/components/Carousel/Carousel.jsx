@@ -1,21 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getMovieList } from "@/config/API";
+import { getList } from "@/config/API";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
 import CarouselItem from "./CarouselItem/CarouselItem";
 import SliderArrow from "../SliderArrow/SliderArrow";
 
-const Carousel = ({ listName }) => {
+const Carousel = ({ mediaType, listName }) => {
     const [items, setItems] = useState([]);
     const [hasMounted, setHasMounted] = useState(false);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         if (!hasMounted) {
-            getMovieList(listName).then((res, err) => {
+            getList(mediaType, listName).then((res, err) => {
                 if (err) {
                     console.log(err);
                     return;
@@ -43,7 +43,9 @@ const Carousel = ({ listName }) => {
     if (!hasMounted) return <></>;
     return (
         <div className="pl-4">
-            <h1 className="text-left mt-2 mb-2 ">{listName}</h1>
+            <h1 className="text-left mt-2 mb-2 ">
+                {listName.replaceAll("_", " ")}
+            </h1>
 
             <div ref={sliderRef} className="Carousel keen-slider">
                 {items.map((item, i) => {

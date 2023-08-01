@@ -1,11 +1,11 @@
 const axios = require("axios");
 
-export const getMovieList = (movieList) => {
+export const getList = (mediaType, listName) => {
     const API_KEY = process.env.NEXT_PUBLIC_ACCESS_TOKEN_AUTH;
 
     const options = {
         method: "GET",
-        url: `https://api.themoviedb.org/3/movie/${movieList}`,
+        url: `https://api.themoviedb.org/3/${mediaType}/${listName}?with_original_language=en`,
         headers: {
             accept: "application/json",
             Authorization: `Bearer ${API_KEY}`,
