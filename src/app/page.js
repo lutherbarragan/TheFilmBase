@@ -11,7 +11,7 @@ export default function Home() {
             <Carousel mediaType="movie" listName="popular" />
             <Carousel mediaType="movie" listName="upcoming" />
             <Carousel mediaType="movie" listName="top_rated" />
-            <h1 className="text-left border-b-2 border-red-600 pb-1 mx-4 text-2xl">
+            <h1 className="text-left border-b-2 border-red-600 pb-1 mt-2 mx-4 text-2xl">
                 Shows
             </h1>
             <Carousel mediaType="tv" listName="popular" />

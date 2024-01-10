@@ -5,7 +5,7 @@ import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
 const CarouselItem = ({ item, lastSlide, href }) => {
     if (lastSlide) {
         return (
-            <Link href="/movies/discover">
+            <Link href={href}>
                 <div className="keen-slider__slide bg-zinc-900 text-white flex justify-center items-center mr-4">
                     <div>
                         <p>Discover</p>

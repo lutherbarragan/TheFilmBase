@@ -53,3 +53,21 @@ export const getAllTrending = () => {
         .then((res) => res.data)
         .catch((err) => err);
 };
+
+export const getDetails = (type, id) => {
+    const API_KEY = process.env.NEXT_PUBLIC_ACCESS_TOKEN_AUTH;
+
+    const options = {
+        method: "GET",
+        url: `https://api.themoviedb.org/3/${type}/${id}`,
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${API_KEY}`,
+        },
+    };
+
+    return axios
+        .request(options)
+        .then((res) => res.data)
+        .catch((err) => err);
+};

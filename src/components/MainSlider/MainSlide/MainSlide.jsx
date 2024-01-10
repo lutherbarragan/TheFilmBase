@@ -15,8 +15,13 @@ export default function MovieSlide({ movie, index }) {
             getMovieLogo(movie.id).then((res) => {
                 setBackdrop(res.backdrops[0].file_path);
 
-                if (res.logos[0]?.file_path) {
-                    setLogo(res.logos[0].file_path);
+                if (res.logos) {
+                    for (const logo of res.logos) {
+                        if (logo.iso_639_1 === "en") {
+                            setLogo(logo.file_path);
+                            break;
+                        }
+                    }
                 }
             });
         }
