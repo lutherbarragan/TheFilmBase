@@ -1,7 +1,5 @@
-export default function MoviePage({ params }) {
-    return (
-        <div className="text-center">
-            <h1>ID: {params.id} </h1>
-        </div>
-    );
+import MediaContentPage from "@/components/MediaContentPage/MediaContentPage";
+
+export default function ShowPage({ params }) {
+    return <MediaContentPage mediaType="tv" mediaId={params.id} />;
 }
