@@ -5,6 +5,9 @@ import { getDetails } from "@/config/API";
 
 export default function MediaContentPage({ mediaType, mediaId }) {
     const [mediaContent, setMediaContent] = useState({});
+    const [expanded, setExpanded] = useState(false);
+    const [overviewText, setOverviewText] = useState("");
+    const overviewLength = 310;
 
     useEffect(() => {
         getDetails(mediaType, mediaId).then((res, err) => {
@@ -15,9 +18,14 @@ export default function MediaContentPage({ mediaType, mediaId }) {
             if (res) {
                 console.log(res);
                 setMediaContent(res);
+                setOverviewText(res.overview);
             }
         });
     }, []);
+
+    const toggleExpansion = () => {
+        setExpanded(!expanded);
+    };
 
     if (Object.keys(mediaContent).length <= 0) return <></>;
 
@@ -27,32 +35,45 @@ export default function MediaContentPage({ mediaType, mediaId }) {
                 <img
                     src={`https://image.tmdb.org/t/p/original${mediaContent.backdrop_path}`}
                     alt={mediaContent.title}
-                    className="blur-sm"
+                    className={`blur-sm object-cover transition-all duration-500 ease-in-out brightness-50 w-full ${
+                        expanded ? " h-80" : "h-56"
+                    }`}
                 />
 
-                <div className="absolute inset-0 px-2 py-2">
-                    <div className=" w-full flex justify-between">
-                        <img
-                            src={`https://image.tmdb.org/t/p/original${mediaContent.poster_path}`}
-                            alt={`${mediaContent.title} Poster`}
-                            className="h-40 shadow-xl"
-                        />
-                        <div className="pl-4 w-full">
-                            <h1 className="text-lg font-bold">
-                                {mediaType == "movie"
-                                    ? mediaContent.title
-                                    : mediaContent.original_name}
-                            </h1>
-                            <p className="text-xs mb-4">
-                                {mediaContent.release_date.split("-")[0]}
-                            </p>
+                <div className="absolute inset-0 p-2 pb-8 w-full flex justify-between">
+                    <img
+                        src={`https://image.tmdb.org/t/p/original${mediaContent.poster_path}`}
+                        alt={`${mediaContent.title} Poster`}
+                        className="h-40 shadow-xl"
+                    />
 
-                            <p className="text-xs h-28 overflow-scroll">
-                                {mediaContent.overview}
-                            </p>
-                        </div>
+                    <div className="pl-4 w-full overflow-hidden">
+                        <h1 className="text-lg font-bold">
+                            {mediaType == "movie"
+                                ? mediaContent.title
+                                : mediaContent.name ||
+                                  mediaContent.original_name}
+                        </h1>
+
+                        <p className="text-xs mb-1">
+                            {mediaContent?.release_date?.split("-")[0]}
+                        </p>
+
+                        <p className="text-xs my-2 font-semibold">
+                            {overviewText}
+                        </p>
                     </div>
                 </div>
+                {overviewText.length > overviewLength ? (
+                    <button
+                        className="absolute bottom-3 left-1/2 text-red-600 font-semibold text-sm focus:outline-none"
+                        onClick={toggleExpansion}
+                    >
+                        {expanded ? "↑ Read Less ↑" : "↓ Read more ↓"}
+                    </button>
+                ) : (
+                    ""
+                )}
             </div>
         </>
     );
