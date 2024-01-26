@@ -7,20 +7,19 @@ export default function MediaContentPage({ mediaType, mediaId }) {
     const [mediaContent, setMediaContent] = useState({});
     const [expanded, setExpanded] = useState(false);
     const [overviewText, setOverviewText] = useState("");
-    const overviewLength = 310;
+    const MAX_OVERVIEW_LENGTH = 310;
 
     useEffect(() => {
-        getDetails(mediaType, mediaId).then((res, err) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            if (res) {
+        console.log(mediaType, mediaId);
+        getDetails(mediaType, mediaId)
+            .then((res) => {
                 console.log(res);
                 setMediaContent(res);
                 setOverviewText(res.overview);
-            }
-        });
+            })
+            .catch((err) => {
+                console.error("Error fetching media details:", err);
+            });
     }, []);
 
     const toggleExpansion = () => {
@@ -74,15 +73,13 @@ export default function MediaContentPage({ mediaType, mediaId }) {
                 </div>
             </div>
 
-            {overviewText.length > overviewLength ? (
+            {overviewText.length > MAX_OVERVIEW_LENGTH && (
                 <button
                     className="absolute bottom-3 left-1/2 text-red-600 font-semibold text-sm focus:outline-none"
                     onClick={toggleExpansion}
                 >
                     {expanded ? "↑ Read Less ↑" : "↓ Read more ↓"}
                 </button>
-            ) : (
-                ""
             )}
         </div>
     );

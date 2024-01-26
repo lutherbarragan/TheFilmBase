@@ -4,7 +4,7 @@ import Carousel from "@/components/Carousel/Carousel";
 export default function Home() {
     return (
         <div className="text-center">
-            <MainSlider mediaType="movie" listName="popular" />
+            <MainSlider mediaType="all" listName="trending" />
             <h1 className="text-left border-b-2 border-red-600 pb-1 mx-4 text-2xl">
                 Movies
             </h1>

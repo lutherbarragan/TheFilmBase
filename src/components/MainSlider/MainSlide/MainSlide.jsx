@@ -2,18 +2,18 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getMovieLogo } from "@/config/API";
+import { getMediaLogo } from "@/config/API";
 
 import "./MainSlide.css";
 
-export default function MovieSlide({ movie, index }) {
+export default function MovieSlide({ mediaDetails, index, mediaType }) {
     const [backdrop, setBackdrop] = useState(null);
     const [logo, setLogo] = useState(null);
 
     useEffect(() => {
         if (!logo && !backdrop) {
-            getMovieLogo(movie.id).then((res) => {
-                setBackdrop(res.backdrops[0].file_path);
+            getMediaLogo(mediaType, mediaDetails.id).then((res) => {
+                setBackdrop(res.backdrops[0]?.file_path);
 
                 if (res.logos) {
                     for (const logo of res.logos) {
@@ -28,13 +28,13 @@ export default function MovieSlide({ movie, index }) {
     }, [logo, backdrop]);
 
     return (
-        <Link href={`/movies/${movie.id}`}>
+        <Link href={`/movies/${mediaDetails.id}`}>
             <div
                 className={`keen-slider__slide number-slide${index++} relative w-screen max-h-screen`}
             >
                 <img
-                    src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                    alt={movie.title}
+                    src={`https://image.tmdb.org/t/p/original${mediaDetails.backdrop_path}`}
+                    alt={mediaDetails.title}
                     className=" w-full -z-10"
                 />
                 <div className="slider_content absolute top-0 left-0 w-full h-full p-2">
@@ -45,7 +45,7 @@ export default function MovieSlide({ movie, index }) {
                         />
                     ) : (
                         <h2 className="absolute bottom-4 left-1/2 -translate-x-1/2 text-3xl font-thin text-left">
-                            {movie.title}
+                            {mediaDetails.title}
                         </h2>
                     )}
                 </div>

@@ -1,73 +1,62 @@
 const axios = require("axios");
 
-export const getList = (mediaType, listName) => {
-    const API_KEY = process.env.NEXT_PUBLIC_ACCESS_TOKEN_AUTH;
+const TMDB_API_KEY = process.env.NEXT_PUBLIC_ACCESS_TOKEN_AUTH;
+const BASE_URL = "https://api.themoviedb.org/3";
 
-    const options = {
-        method: "GET",
-        url: `https://api.themoviedb.org/3/${mediaType}/${listName}?with_original_language=en`,
-        headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${API_KEY}`,
-        },
-    };
+const axiosInstance = axios.create({
+    baseURL: BASE_URL,
+    headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${TMDB_API_KEY}`,
+    },
+});
 
-    return axios
-        .request(options)
-        .then((res) => res.data)
-        .catch((err) => err);
+const handleRequest = async (config) => {
+    try {
+        const response = await axiosInstance.request(config);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        throw new Error("Failed to fetch data from the API.");
+    }
 };
 
-export const getMovieLogo = (id) => {
-    const API_KEY = process.env.NEXT_PUBLIC_ACCESS_TOKEN_AUTH;
-
-    const options = {
+export const getList = async (mediaType, listName) => {
+    const url =
+        listName === "trending"
+            ? `/trending/all/day`
+            : `/${mediaType}/${listName}?with_original_language=en`;
+    const config = {
         method: "GET",
-        url: `https://api.themoviedb.org/3/movie/${id}/images`,
-        headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${API_KEY}`,
-        },
+        url,
     };
-
-    return axios
-        .request(options)
-        .then((res) => res.data)
-        .catch((err) => err);
+    return handleRequest(config);
 };
 
-export const getAllTrending = () => {
-    const API_KEY = process.env.NEXT_PUBLIC_ACCESS_TOKEN_AUTH;
-
-    const options = {
+export const getMediaLogo = async (mediaType, id) => {
+    const config = {
         method: "GET",
-        url: "https://api.themoviedb.org/3/trending/all/day",
-        headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${API_KEY}`,
-        },
+        url: `/${mediaType}/${id}/images`,
     };
-
-    return axios
-        .request(options)
-        .then((res) => res.data)
-        .catch((err) => err);
+    return handleRequest(config);
 };
 
-export const getDetails = (type, id) => {
-    const API_KEY = process.env.NEXT_PUBLIC_ACCESS_TOKEN_AUTH;
-
-    const options = {
+export const getDetails = async (type, id) => {
+    const config = {
         method: "GET",
-        url: `https://api.themoviedb.org/3/${type}/${id}`,
-        headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${API_KEY}`,
-        },
+        url: `/${type}/${id}`,
     };
-
-    return axios
-        .request(options)
-        .then((res) => res.data)
-        .catch((err) => err);
+    return handleRequest(config);
 };
+
+// getReviews
+
+// getVideos
+
+// getCredits
+
+// getExternalIds
+
+// getSimilar
+
+// getWatchProviders

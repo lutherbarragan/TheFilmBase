@@ -22,7 +22,6 @@ const Carousel = ({ mediaType, listName }) => {
                 }
                 if (res?.results) {
                     const results = [...res.results];
-                    console.log(res);
                     setItems(results);
                     setHasMounted(true);
                 }

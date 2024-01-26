@@ -5,11 +5,11 @@ import { getList, getAllTrending } from "@/config/API";
 import React from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import MovieSlide from "./MainSlide/MainSlide";
+import MainSlide from "./MainSlide/MainSlide";
 import SliderArrow from "../SliderArrow/SliderArrow";
 
 export default function MainSlider({ mediaType, listName }) {
-    const [movies, setMovies] = useState([]);
+    const [trending, setTrending] = useState([]);
     const [hasMounted, setHasMounted] = useState(false);
     const [loaded, setLoaded] = useState(false);
 
@@ -60,8 +60,8 @@ export default function MainSlider({ mediaType, listName }) {
                     return;
                 }
                 if (res?.results) {
-                    const movieSlides = [...res.results].slice(0, 10);
-                    setMovies(movieSlides);
+                    const trendingSlides = [...res.results].slice(0, 10);
+                    setTrending(trendingSlides);
                     setHasMounted(true);
                 }
             });
@@ -73,12 +73,13 @@ export default function MainSlider({ mediaType, listName }) {
         <>
             <div className="navigation-wrapper relative">
                 <div ref={sliderRef} className="keen-slider">
-                    {movies.map((movie, i) => {
+                    {trending.map((media, i) => {
                         return (
-                            <MovieSlide
-                                movie={movie}
+                            <MainSlide
+                                mediaDetails={media}
                                 index={i}
-                                key={movie.id}
+                                key={media.id}
+                                mediaType={media.media_type}
                             />
                         );
                     })}
