@@ -28,7 +28,7 @@ export default function MovieSlide({ mediaDetails, index, mediaType }) {
     }, [logo, backdrop]);
 
     return (
-        <Link href={`/movies/${mediaDetails.id}`}>
+        <Link href={`/${mediaType}/${mediaDetails.id}`}>
             <div
                 className={`keen-slider__slide number-slide${index++} relative w-screen max-h-screen`}
             >

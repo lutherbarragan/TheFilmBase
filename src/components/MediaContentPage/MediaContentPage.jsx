@@ -7,7 +7,7 @@ export default function MediaContentPage({ mediaType, mediaId }) {
     const [mediaContent, setMediaContent] = useState({});
     const [expanded, setExpanded] = useState(false);
     const [overviewText, setOverviewText] = useState("");
-    const MAX_OVERVIEW_LENGTH = 310;
+    const MAX_OVERVIEW_LENGTH = 350;
 
     useEffect(() => {
         console.log(mediaType, mediaId);
@@ -66,7 +66,13 @@ export default function MediaContentPage({ mediaType, mediaId }) {
                     </h1>
 
                     <p className="text-xs mb-1">
-                        {mediaContent.release_date?.split("-")[0]}
+                        {mediaType == "movie"
+                            ? mediaContent.release_date?.split("-")[0]
+                            : mediaContent.first_air_date?.split("-")[0]}
+
+                        {mediaType == "movie"
+                            ? ` • ${mediaContent.runtime} mins`
+                            : ` • ${mediaContent.number_of_seasons} Seasons`}
                     </p>
 
                     <p className="text-xs my-2 ">{overviewText}</p>

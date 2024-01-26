@@ -52,17 +52,11 @@ const Carousel = ({ mediaType, listName }) => {
                         <CarouselItem
                             key={item.id}
                             item={item}
-                            href={`/${
-                                mediaType == "movie" ? "movies" : "shows"
-                            }/${item.id}`}
+                            href={`/${mediaType}/${item.id}`}
                         />
                     );
                 })}
-                <CarouselItem
-                    href={`/${mediaType == "movie" ? "movies" : "shows"}`}
-                    lastSlide={true}
-                />
-                ;
+                <CarouselItem href={`/${mediaType}`} lastSlide={true} />;
                 {loaded && instanceRef.current && (
                     <>
                         <SliderArrow
