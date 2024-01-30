@@ -1,5 +1,5 @@
-import MediaContentPage from "@/components/MediaContentPage/MediaContentPage";
+import DetailsPage from "@/components/DetailsPage/DetailsPage";
 
 export default function MoviePage({ params }) {
-    return <MediaContentPage mediaType="movie" mediaId={params.id} />;
+    return <DetailsPage mediaType="movie" mediaId={params.id} />;
 }

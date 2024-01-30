@@ -49,7 +49,6 @@ export const getDetails = async (type, id) => {
     return handleRequest(config);
 };
 
-// getReviews
 export const getCredits = async (type, id) => {
     const config = {
         method: "GET",
@@ -60,7 +59,7 @@ export const getCredits = async (type, id) => {
 
 // getVideos
 
-// getCredits
+// getReviews
 
 // getExternalIds
 
