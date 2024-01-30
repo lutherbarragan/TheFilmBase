@@ -50,6 +50,13 @@ export const getDetails = async (type, id) => {
 };
 
 // getReviews
+export const getCredits = async (type, id) => {
+    const config = {
+        method: "GET",
+        url: `/${type}/${id}/credits?language=en-US`,
+    };
+    return handleRequest(config);
+};
 
 // getVideos
 

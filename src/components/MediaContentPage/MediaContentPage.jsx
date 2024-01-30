@@ -2,20 +2,27 @@
 
 import { useState, useEffect } from "react";
 import { getDetails } from "@/config/API";
+import BlurredBackground from "./BlurredBackground/BlurredBackground";
+import ExpandButton from "./ExpandButton/ExpandButton";
+import GenreList from "./GenreList/GenreList";
 
 export default function MediaContentPage({ mediaType, mediaId }) {
-    const [mediaContent, setMediaContent] = useState({});
     const [expanded, setExpanded] = useState(false);
-    const [overviewText, setOverviewText] = useState("");
+    const [title, setTitle] = useState("");
+    const [year, setYear] = useState("");
+    const [duration, setDuration] = useState("");
+    const [mediaContent, setMediaContent] = useState({});
+
     const MAX_OVERVIEW_LENGTH = 350;
 
     useEffect(() => {
-        console.log(mediaType, mediaId);
         getDetails(mediaType, mediaId)
             .then((res) => {
                 console.log(res);
                 setMediaContent(res);
-                setOverviewText(res.overview);
+                setTitle(getTitle(res));
+                setYear(getYear(res));
+                setDuration(getDuration(res));
             })
             .catch((err) => {
                 console.error("Error fetching media details:", err);
@@ -26,66 +33,56 @@ export default function MediaContentPage({ mediaType, mediaId }) {
         setExpanded(!expanded);
     };
 
-    if (Object.keys(mediaContent).length <= 0) return <></>;
+    const getTitle = (data) => {
+        if (mediaType === "movie") return data.title || data.original_title;
+        else if (mediaType === "tv") return data.name || data.original_name;
+    };
+    const getYear = (data) => {
+        if (mediaType === "movie") return data.release_date.split("-")[0];
+        else if (mediaType === "tv") return data.first_air_date.split("-")[0];
+    };
+    const getDuration = (data) => {
+        if (mediaType === "movie") return `${data.runtime} Mins`;
+        else if (mediaType === "tv")
+            return `${data.seasons.length} ${
+                data.seasons.length === 1 ? "Season" : "Seasons"
+            }`;
+    };
+
+    if (Object.keys(mediaContent).length <= 0) return null;
 
     return (
         <div className="relative mt-4">
-            <img
-                src={`https://image.tmdb.org/t/p/original${mediaContent.backdrop_path}`}
-                alt={mediaContent.title}
-                className={`blur-sm object-cover transition-all duration-500 ease-in-out brightness-50 w-full ${
-                    expanded ? " h-80" : "h-56"
-                }`}
+            <BlurredBackground
+                backdrop_path={mediaContent.backdrop_path}
+                title={title}
+                expanded={expanded}
             />
 
             <div className="absolute inset-0 p-2 pb-8 w-full flex justify-between">
                 <div className="w-2/6">
                     <img
                         src={`https://image.tmdb.org/t/p/original${mediaContent.poster_path}`}
-                        alt={`${mediaContent.title} Poster`}
+                        alt={`${title} Poster`}
                         className=" w-full shadow-xl"
                     />
 
-                    <div className="flex flex-wrap justify-center">
-                        {mediaContent.genres.map((genre, i) => (
-                            <span
-                                key={genre.name}
-                                className="leading-4 text-xs mr-1"
-                            >
-                                • {genre.name}
-                            </span>
-                        ))}
-                    </div>
+                    <GenreList genres={mediaContent.genres} />
                 </div>
 
                 <div className="pl-2 w-4/6 overflow-hidden">
-                    <h1 className="text-lg font-bold">
-                        {mediaType == "movie"
-                            ? mediaContent.title
-                            : mediaContent.name || mediaContent.original_name}
-                    </h1>
+                    <h1 className="text-lg font-bold">{title}</h1>
 
                     <p className="text-xs mb-1">
-                        {mediaType == "movie"
-                            ? mediaContent.release_date?.split("-")[0]
-                            : mediaContent.first_air_date?.split("-")[0]}
-
-                        {mediaType == "movie"
-                            ? ` • ${mediaContent.runtime} mins`
-                            : ` • ${mediaContent.number_of_seasons} Seasons`}
+                        {year} • {duration}
                     </p>
 
-                    <p className="text-xs my-2 ">{overviewText}</p>
+                    <p className="text-xs my-2 ">{mediaContent.overview}</p>
                 </div>
             </div>
 
-            {overviewText.length > MAX_OVERVIEW_LENGTH && (
-                <button
-                    className="absolute bottom-3 left-1/2 text-red-600 font-semibold text-sm focus:outline-none"
-                    onClick={toggleExpansion}
-                >
-                    {expanded ? "↑ Read Less ↑" : "↓ Read more ↓"}
-                </button>
+            {mediaContent.overview.length > MAX_OVERVIEW_LENGTH && (
+                <ExpandButton onClick={toggleExpansion} isExpanded={expanded} />
             )}
         </div>
     );
